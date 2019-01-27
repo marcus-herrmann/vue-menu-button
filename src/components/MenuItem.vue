@@ -1,5 +1,6 @@
 <template>
     <li
+            data-vue-menu-item
             role="menuitem"
             tabindex="-1"
             @click="emitClick"

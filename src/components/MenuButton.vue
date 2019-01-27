@@ -1,6 +1,7 @@
 <template>
     <div @keyup.esc="escHandler">
         <button
+                data-vue-menu-button
                 ref="button"
                 :aria-expanded="isOpen.toString()"
                 aria-haspopup="true"
@@ -12,6 +13,7 @@
             <slot name="menu-button"></slot>
         </button>
         <ul
+                data-vue-menu
                 v-show="isOpen"
                 ref="list"
                 role="menu"
