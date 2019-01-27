@@ -14,7 +14,7 @@ export default {
       let el = vNode.elm;
       el.setAttribute("role", "menuitem");
       el.setAttribute("tabindex", "-1");
-      el.setAttribute("data-vue-menu-link");
+      el.setAttribute("data-vue-menu-link", "");
     });
   }
 };
