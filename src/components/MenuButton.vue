@@ -1,0 +1,85 @@
+<template>
+    <div @keyup.esc="escHandler">
+        <button
+                ref="button"
+                :aria-expanded="isOpen.toString()"
+                aria-haspopup="true"
+                :aria-controls="id"
+                @click="toggleMenu"
+                @keyup.down="openMenuAndFocus(0);"
+                @keyup.up="openMenuAndFocus(-1);"
+        >
+            <slot name="menu-button"></slot>
+        </button>
+        <ul
+                v-show="isOpen"
+                ref="list"
+                role="menu"
+                :id="id"
+                @keyup.down="focusNext"
+                @keyup.up="focusPrev"
+                @click="escHandler"
+        >
+            <slot name="menu-content"></slot>
+        </ul>
+    </div>
+</template>
+
+<script>
+export default {
+  data: function() {
+    return {
+      isOpen: false,
+      focusables: null,
+      focusedMenuItem: null,
+      menutype: null,
+      id: null
+    };
+  },
+  mounted() {
+    this.focusables = this.$refs.list.querySelectorAll("[tabindex='-1']");
+    this.id = Math.random()
+      .toString(36)
+      .substring(2, 15);
+  },
+  methods: {
+    toggleMenu() {
+      this.$emit("click", !this.isOpen);
+      this.isOpen = !this.isOpen;
+    },
+    focusNext() {
+      if (this.focusedMenuItem + 1 >= this.focusables.length) {
+        this.focusedMenuItem = 0;
+      } else {
+        this.focusedMenuItem = this.focusedMenuItem + 1;
+      }
+      this.setMenuItemFocus(this.focusedMenuItem);
+    },
+    focusPrev() {
+      if (this.focusedMenuItem === 0) {
+        this.focusedMenuItem = this.focusables.length - 1;
+      } else {
+        this.focusedMenuItem = this.focusedMenuItem - 1;
+      }
+      this.setMenuItemFocus(this.focusedMenuItem);
+    },
+    setMenuItemFocus(index) {
+      setTimeout(() => {
+        this.focusables[index].focus();
+      }, 0);
+    },
+    escHandler() {
+      this.isOpen = false;
+      this.focusedMenuItem = null;
+      setTimeout(() => {
+        this.$refs.button.focus();
+      }, 0);
+    },
+    openMenuAndFocus(index) {
+      this.isOpen = true;
+      this.focusedMenuItem = index === -1 ? this.focusables.length - 1 : index;
+      this.setMenuItemFocus(this.focusedMenuItem);
+    }
+  }
+};
+</script>
