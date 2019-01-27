@@ -7,10 +7,15 @@ Accessible menu button
 
 ## Installation:
 ```bash
-npm install vue-meu-button --save
+npm install vue-menu-button --save
 ```
 
 ## Usage
+
+```js
+import { MenuWrapper, MenuItem, MenuLink } from "vue-menu-button";
+```
+
 ```xml
 <menu-wrapper>
   <template slot="menu-button"
