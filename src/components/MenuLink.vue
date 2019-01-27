@@ -1,5 +1,5 @@
 <template>
-    <li role="none" data-vue-menu-link><slot @click="emitClick"></slot></li>
+    <li role="none"><slot @click="emitClick"></slot></li>
 </template>
 
 <script>
@@ -14,6 +14,7 @@ export default {
       let el = vNode.elm;
       el.setAttribute("role", "menuitem");
       el.setAttribute("tabindex", "-1");
+      el.setAttribute("data-vue-menu-link");
     });
   }
 };

@@ -1,6 +1,6 @@
 {
   "name": "vue-menu-button",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Accessible menu button component",
   "main": "src/main.js",
   "repository": {
