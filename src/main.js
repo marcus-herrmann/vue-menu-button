@@ -1,5 +1,5 @@
-import MenuItem from "./MenuItem.vue";
-import MenuLink from "./MenuLink.vue";
-import MenuWrapper from "./MenuButton.vue";
+import MenuItem from "./components/MenuItem.vue";
+import MenuLink from "./components/MenuLink.vue";
+import MenuWrapper from "./components/MenuButton.vue";
 
 export { MenuWrapper, MenuItem, MenuLink };
