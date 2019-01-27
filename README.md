@@ -1,6 +1,7 @@
-# Vue Menu Button
+# Vue Menu Button (Work in Progress)
 
 Accessible menu button
+![Short animation showing the component](https://media.giphy.com/media/2kLXAWlfgu5YwHcIG5/giphy.gif)
 
 [Demo](https://codesandbox.io/s/zqv3170qlp)
 
