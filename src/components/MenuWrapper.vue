@@ -44,6 +44,17 @@ export default {
       .toString(36)
       .substring(2, 15);
   },
+  created() {
+    const escapeHandler = e => {
+      if (e.key === "Escape" && this.isOpen) {
+        this.escHandler();
+      }
+    };
+    document.addEventListener("keydown", escapeHandler);
+    this.$once("hook:destroyed", () => {
+      document.removeEventListener("keydown", escapeHandler);
+    });
+  },
   methods: {
     toggleMenu() {
       this.$emit("click", !this.isOpen);
