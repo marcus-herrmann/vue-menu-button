@@ -1,5 +1,5 @@
 <template>
-    <div @keyup.esc="escHandler">
+    <div ref="menu">
         <button
                 data-vue-menu-button
                 ref="button"
@@ -20,7 +20,7 @@
                 :id="id"
                 @keyup.down="focusNext"
                 @keyup.up="focusPrev"
-                @click="escHandler"
+                @click="closeHandler"
         >
             <slot name="menu-content"></slot>
         </ul>
@@ -34,7 +34,6 @@ export default {
       isOpen: false,
       focusables: null,
       focusedMenuItem: null,
-      menutype: null,
       id: null
     };
   },
@@ -47,15 +46,27 @@ export default {
   created() {
     const escapeHandler = e => {
       if (e.key === "Escape" && this.isOpen) {
-        this.escHandler();
+        this.closeHandler();
       }
     };
     document.addEventListener("keydown", escapeHandler);
+    document.addEventListener("click", this.documentClick);
+
     this.$once("hook:destroyed", () => {
       document.removeEventListener("keydown", escapeHandler);
     });
   },
+  destroyed() {
+    document.removeEventListener("click", this.documentClick);
+  },
   methods: {
+    documentClick(e) {
+      let el = this.$refs.menu;
+      let target = e.target;
+      if (el !== target && !el.contains(target)) {
+        this.closeHandler();
+      }
+    },
     toggleMenu() {
       this.$emit("click", !this.isOpen);
       this.isOpen = !this.isOpen;
@@ -81,7 +92,7 @@ export default {
         this.focusables[index].focus();
       }, 0);
     },
-    escHandler() {
+    closeHandler() {
       this.isOpen = false;
       this.focusedMenuItem = null;
       setTimeout(() => {
