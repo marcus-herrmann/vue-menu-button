@@ -7,8 +7,8 @@
                 aria-haspopup="true"
                 :aria-controls="id"
                 @click="toggleMenu"
-                @keyup.down="openMenuAndFocus(0);"
-                @keyup.up="openMenuAndFocus(-1);"
+                @keyup.down="openMenuAndFocus(0)"
+                @keyup.up="openMenuAndFocus(-1)"
         >
             <slot name="menu-button"></slot>
         </button>
@@ -20,7 +20,7 @@
                 :id="id"
                 @keyup.down="focusNext"
                 @keyup.up="focusPrev"
-                @click="closeHandler"
+                @close_menu="closeHandler(false)"
         >
             <slot name="menu-content"></slot>
         </ul>
@@ -46,7 +46,7 @@ export default {
   created() {
     const escapeHandler = e => {
       if (e.key === "Escape" && this.isOpen) {
-        this.closeHandler();
+        this.closeHandler(true);
       }
     };
     document.addEventListener("keydown", escapeHandler);
@@ -92,12 +92,15 @@ export default {
         this.focusables[index].focus();
       }, 0);
     },
-    closeHandler() {
+    closeHandler(moveFocusToMenuButtonAfterClose) {
       this.isOpen = false;
       this.focusedMenuItem = null;
-      setTimeout(() => {
-        this.$refs.button.focus();
-      }, 0);
+
+      if (moveFocusToMenuButtonAfterClose) {
+        setTimeout(() => {
+          this.$refs.button.focus();
+        }, 0);
+      }
     },
     openMenuAndFocus(index) {
       this.isOpen = true;

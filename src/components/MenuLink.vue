@@ -1,14 +1,10 @@
 <template>
-    <li role="none"><slot @click="emitClick"></slot></li>
+    <li role="none" @click="$parent.closeHandler(false)"><slot></slot></li>
 </template>
 
 <script>
 export default {
-  methods: {
-    emitClick() {
-      this.$emit("click");
-    }
-  },
+
   mounted() {
     this.$slots.default.forEach(vNode => {
       let el = vNode.elm;
