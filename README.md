@@ -3,7 +3,7 @@
 Accessible menu button
 ![Short animation showing the component](https://media.giphy.com/media/2kLXAWlfgu5YwHcIG5/giphy.gif)
 
-[Demo](https://codesandbox.io/s/zqv3170qlp)
+[**DEMO**](https://codesandbox.io/s/zqv3170qlp)
 
 ## Installation:
 ```bash
@@ -29,3 +29,7 @@ import { MenuWrapper, MenuItem, MenuLink } from "vue-menu-button";
   </template>
 </menu-wrapper>
 ```
+
+### Background
+* Why I built this component: https://marcus.io/blog/a11y-app-menu-button
+* Short tutorial from W3C: https://www.w3.org/WAI/tutorials/menus/application-menus/
